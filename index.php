@@ -5,7 +5,7 @@
     require_once 'includes/header.php'; 
     require_once 'db/conn.php'; 
 
-  
+    $results = $crud->getSpecialties();
 
 ?>
     <!-- 
@@ -31,7 +31,8 @@
             <label for="dob">Date Of Birth</label>
             <input type="text" class="form-control" id="dob" name="dob">
         </div>
-        <div class="form-group">
+         <!-- 
+      <div class="form-group">
             <label for="specialty">Area of Expertise</label>
             <select class="form-control" id="specialty" name="specialty">           
                <option value="1">Database Admin</option>
@@ -39,7 +40,16 @@
                <option value="5">Web Administrator</option>
                <option value="7">Other</option>
             </select>
-        </div>
+        </div>     
+        -->
+        <div class="form-group">
+            <label for="specialty">Area of Expertise</label>
+            <select class="form-control" id="specialty" name="specialty">           
+            <?php while($r = $results->fetch(PDO::FETCH_ASSOC)) {?>
+                   <option value="<?php echo $r['specialty_id'] ?>"><?php echo $r['name']; ?></option>
+                <?php }?>
+            </select>
+
         <div class="form-group">
             <label for="email">Email address</label>
             <input required type="email" class="form-control" id="email"  name="email" aria-describedby="emailHelp" >
